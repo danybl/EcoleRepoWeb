@@ -49,6 +49,23 @@ namespace EcoleWeb.Controllers
             return View(donnee);
         }
 
+        public ActionResult Class()
+        {
+            ViewBag.Message = "La liste des cours offerts";
+
+            CourseRegistrationViewModel loCourseRegistrationViewModel = new CourseRegistrationViewModel();
+            List<ClassModels> listeCours = new List<ClassModels>();
+
+            loCourseRegistrationViewModel.nom = "Anglais";
+            loCourseRegistrationViewModel.dureeTotale = 60;
+            
+
+
+
+            var donnee = listeCours;
+            return View(donnee);
+        }
+
         public ActionResult Contact()
         {
             return View();
