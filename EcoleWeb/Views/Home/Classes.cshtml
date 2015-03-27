@@ -12,5 +12,8 @@
 @grille.GetHtml(tableStyle: "table table-striped table-hover", columns: new [] {
     grille.Column("ID"),
     grille.Column("nom", header:"Nom de cours"),
-    grille.Column("dureeTotale", header:"Durée totale du cours")
+    grille.Column("dureeTotale", header:"Durée totale du cours"),
+    grille.Column(format: @<form method="get" action="/Controller/Action/@item.id">
+                               <input id="Inscrire" type="submit" value="S'inscrire" />
+    </form>, header:"S'inscrire au cours")
 })
