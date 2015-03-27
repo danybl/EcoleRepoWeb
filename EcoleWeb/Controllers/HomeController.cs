@@ -26,16 +26,19 @@ namespace EcoleWeb.Controllers
             loClassModels.dureeTotale = 60;
             listeCours.Add(loClassModels);
 
+            loClassModels = new ClassModels();
             loClassModels.ID = 2;
             loClassModels.nom = "Math";
             loClassModels.dureeTotale = 45;
             listeCours.Add(loClassModels);
 
+            loClassModels = new ClassModels();
             loClassModels.ID = 3;
             loClassModels.nom = "Educ";
             loClassModels.dureeTotale = 45;
             listeCours.Add(loClassModels);
 
+            loClassModels = new ClassModels();
             loClassModels.ID = 4;
             loClassModels.nom = "Histoire";
             loClassModels.dureeTotale = 60;

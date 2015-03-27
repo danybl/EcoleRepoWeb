@@ -11,6 +11,6 @@
 <h2>People</h2>
 @grille.GetHtml(tableStyle: "table table-striped table-hover", columns: new [] {
     grille.Column("ID"),
-    grille.Column("nom"),
-    grille.Column("dureeTotale")
+    grille.Column("nom", header:"Nom de cours"),
+    grille.Column("dureeTotale", header:"Durée totale du cours")
 })
