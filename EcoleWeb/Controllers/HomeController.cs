@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EcoleWeb.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,17 +14,40 @@ namespace EcoleWeb.Controllers
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult Classes()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "La liste des cours offerts";
 
-            return View();
+            ClassModels loClassModels = new ClassModels();
+            List<ClassModels> listeCours = new List<ClassModels>();
+
+            loClassModels.ID = 1;
+            loClassModels.nom = "Anglais";
+            loClassModels.dureeTotale = 60;
+            listeCours.Add(loClassModels);
+
+            loClassModels.ID = 2;
+            loClassModels.nom = "Math";
+            loClassModels.dureeTotale = 45;
+            listeCours.Add(loClassModels);
+
+            loClassModels.ID = 3;
+            loClassModels.nom = "Educ";
+            loClassModels.dureeTotale = 45;
+            listeCours.Add(loClassModels);
+
+            loClassModels.ID = 4;
+            loClassModels.nom = "Histoire";
+            loClassModels.dureeTotale = 60;
+            listeCours.Add(loClassModels);
+
+
+            var donnee = listeCours;
+            return View(donnee);
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
     }

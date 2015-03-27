@@ -1,7 +1,16 @@
-﻿@{
-    ViewBag.Title = "Classes";
+﻿@model IEnumerable<EcoleWeb.Models.ClassModels>
+
+@{
+    ViewBag.Title = "Cours";
+    WebGrid grille = new WebGrid(Model);
+
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<h2>People</h2>
+@grille.GetHtml(tableStyle: "table table-striped table-hover", columns: new [] {
+    grille.Column("ID"),
+    grille.Column("nom"),
+    grille.Column("dureeTotale")
+})
