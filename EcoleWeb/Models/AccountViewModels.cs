@@ -65,6 +65,11 @@ namespace EcoleWeb.Models
     public class RegisterViewModel
     {
         [Required]
+       // [FirstName]
+        [Display(Name = "Prénom")]
+        public string FirstName { get; set; }
+
+        [Required]
         [EmailAddress]
         [Display(Name = "Courrier électronique")]
         public string Email { get; set; }
