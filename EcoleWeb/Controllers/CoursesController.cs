@@ -15,6 +15,9 @@ namespace EcoleWeb.Controllers
             return View();
         }
 
+        // TODO 
+        // Add(){}, Edit(int id){} & Delete(int id)
+      
         public ActionResult List()
         {
             ViewBag.Message = "La liste des cours offerts";
