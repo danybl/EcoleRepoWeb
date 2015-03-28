@@ -5,7 +5,7 @@ using System.Web;
 
 namespace EcoleWeb.Models
 {
-    public class ClassModels
+    public class CourseViewModel
     {
         public Int32 ID { get; set; }
         public string nom { get; set; }
