@@ -1,0 +1,56 @@
+﻿@model EcoleWeb.Models.inscriptioncour
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>inscriptioncour</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateInscription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateInscription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paiments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paiments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cour.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cour.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.etudiant.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.etudiant.nom)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

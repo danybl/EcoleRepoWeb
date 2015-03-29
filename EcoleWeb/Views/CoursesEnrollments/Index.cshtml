@@ -1,0 +1,51 @@
+﻿@model IEnumerable<EcoleWeb.Models.inscriptioncour>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.dateInscription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.paiments)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cour.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.etudiant.nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateInscription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.paiments)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cour.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.etudiant.nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idInscription }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idInscription }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idInscription })
+        </td>
+    </tr>
+}
+
+</table>

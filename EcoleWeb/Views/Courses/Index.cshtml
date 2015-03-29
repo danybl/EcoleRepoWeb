@@ -1,0 +1,105 @@
+﻿@model IEnumerable<EcoleWeb.Models.cour>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dureeTotale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dureeParJour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.jour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.heures)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateLimite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbInscriptionMin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.nbInscriptionMax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateDebut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateFin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.etatcour)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.professeur.nom)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dureeTotale)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dureeParJour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prix)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.jour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.heures)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateLimite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbInscriptionMin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.nbInscriptionMax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateDebut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateFin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.etatcour)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.professeur.nom)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idcour }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idcour }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idcour })
+        </td>
+    </tr>
+}
+
+</table>

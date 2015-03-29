@@ -1,0 +1,50 @@
+﻿@model EcoleWeb.Models.inscriptioncour
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>inscriptioncour</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.dateInscription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateInscription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.paiments)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.paiments)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cour.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cour.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.etudiant.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.etudiant.nom)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idInscription }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

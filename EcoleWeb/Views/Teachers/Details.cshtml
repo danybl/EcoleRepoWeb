@@ -1,0 +1,74 @@
+﻿@model EcoleWeb.Models.professeur
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>professeur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.nom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.prenom)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.prenom)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.adresse)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.adresse)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telephone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telephone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.courriel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.courriel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.dateEmbauche)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.dateEmbauche)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idcourPossible)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idcourPossible)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idProfesseur }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
