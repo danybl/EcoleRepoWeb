@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Ajouter un nouveau cours", "Create")
 </p>
 <table class="table">
     <tr>
@@ -95,9 +95,9 @@
             @Html.DisplayFor(modelItem => item.professeur.nom)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.idcour }) |
-            @Html.ActionLink("Details", "Details", new { id=item.idcour }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.idcour })
+            @Html.ActionLink("Éditer", "Edit", new { id = item.idcour }) |
+            @Html.ActionLink("Détails", "Details", new { id = item.idcour }) |
+            @Html.ActionLink("Supprimer", "Delete", new { id = item.idcour })
         </td>
     </tr>
 }

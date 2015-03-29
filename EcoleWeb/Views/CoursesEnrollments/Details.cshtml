@@ -1,13 +1,13 @@
 ﻿@model EcoleWeb.Models.inscriptioncour
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Détails";
 }
 
-<h2>Details</h2>
+<h2>Détails</h2>
 
 <div>
-    <h4>inscriptioncour</h4>
+    <h4>Inscription d'un cours</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.idInscription }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Éditer", "Edit", new { id = Model.idInscription }) |
+    @Html.ActionLink("Retour à la liste", "Index")
 </p>
