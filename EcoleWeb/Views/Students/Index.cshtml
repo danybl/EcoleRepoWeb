@@ -1,7 +1,69 @@
-﻿@{
+﻿@model IEnumerable<EcoleWeb.Models.etudiant>
+
+@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>Index</h2>
 
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prenom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.adresse)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telephone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.courriel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateInscription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.motDePasse)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.nom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.prenom)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.adresse)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telephone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.courriel)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.dateInscription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.motDePasse)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.idEtudiant }) |
+            @Html.ActionLink("Details", "Details", new { id=item.idEtudiant }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.idEtudiant })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ecoleModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="courriel" Type="varchar" MaxLength="254" Nullable="false" />
+          <Property Name="motDePasse" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cour">
+          <Key>
+            <PropertyRef Name="idcour" />
+          </Key>
+          <Property Name="idcour" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="idProfesseur" Type="int" />
+          <Property Name="dureeTotale" Type="int" Nullable="false" />
+          <Property Name="dureeParJour" Type="int" Nullable="false" />
+          <Property Name="prix" Type="double" Nullable="false" />
+          <Property Name="jour" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="heures" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="dateLimite" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nbInscriptionMin" Type="int" Nullable="false" />
+          <Property Name="nbInscriptionMax" Type="int" Nullable="false" />
+          <Property Name="dateDebut" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="dateFin" Type="timestamp" Precision="0" Nullable="false" />
+          <Property Name="etatcour" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="disponibilite">
+          <Key>
+            <PropertyRef Name="idDisponibilite" />
+          </Key>
+          <Property Name="idDisponibilite" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idProfesseur" Type="int" />
+          <Property Name="lundi" Type="bool" Nullable="false" />
+          <Property Name="mardi" Type="bool" Nullable="false" />
+          <Property Name="mercredi" Type="bool" Nullable="false" />
+          <Property Name="jeudi" Type="bool" Nullable="false" />
+          <Property Name="vendredi" Type="bool" Nullable="false" />
+          <Property Name="samedi" Type="bool" Nullable="false" />
+          <Property Name="dimanche" Type="bool" Nullable="false" />
+        </EntityType>
+        <EntityType Name="etudiant">
+          <Key>
+            <PropertyRef Name="idEtudiant" />
+          </Key>
+          <Property Name="idEtudiant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="courriel" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="dateInscription" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="motDePasse" Type="varchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="inscriptioncour">
+          <Key>
+            <PropertyRef Name="idInscription" />
+          </Key>
+          <Property Name="idInscription" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcour" Type="int" />
+          <Property Name="idEtudiant" Type="int" />
+          <Property Name="dateInscription" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="paiments" Type="double" Nullable="false" />
+        </EntityType>
+        <EntityType Name="professeur">
+          <Key>
+            <PropertyRef Name="idProfesseur" />
+          </Key>
+          <Property Name="idProfesseur" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="prenom" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="adresse" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="telephone" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="courriel" Type="varchar" MaxLength="45" Nullable="false" />
+          <Property Name="dateEmbauche" Type="timestamp" Precision="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idcourPossible" Type="int" />
+        </EntityType>
+        <Association Name="cour_ibfk_1">
+          <End Role="professeur" Type="Self.professeur" Multiplicity="0..1" />
+          <End Role="cour" Type="Self.cour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="professeur">
+              <PropertyRef Name="idProfesseur" />
+            </Principal>
+            <Dependent Role="cour">
+              <PropertyRef Name="idProfesseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="disponibilite_ibfk_1">
+          <End Role="professeur" Type="Self.professeur" Multiplicity="0..1" />
+          <End Role="disponibilite" Type="Self.disponibilite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="professeur">
+              <PropertyRef Name="idProfesseur" />
+            </Principal>
+            <Dependent Role="disponibilite">
+              <PropertyRef Name="idProfesseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscriptioncour_ibfk_1">
+          <End Role="cour" Type="Self.cour" Multiplicity="0..1" />
+          <End Role="inscriptioncour" Type="Self.inscriptioncour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cour">
+              <PropertyRef Name="idcour" />
+            </Principal>
+            <Dependent Role="inscriptioncour">
+              <PropertyRef Name="idcour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscriptioncour_ibfk_2">
+          <End Role="etudiant" Type="Self.etudiant" Multiplicity="0..1" />
+          <End Role="inscriptioncour" Type="Self.inscriptioncour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etudiant">
+              <PropertyRef Name="idEtudiant" />
+            </Principal>
+            <Dependent Role="inscriptioncour">
+              <PropertyRef Name="idEtudiant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ecoleModelStoreContainer">
+          <EntitySet Name="admin" EntityType="Self.admin" Schema="ecole" store:Type="Tables" />
+          <EntitySet Name="cour" EntityType="Self.cour" Schema="ecole" store:Type="Tables" />
+          <EntitySet Name="disponibilite" EntityType="Self.disponibilite" Schema="ecole" store:Type="Tables" />
+          <EntitySet Name="etudiant" EntityType="Self.etudiant" Schema="ecole" store:Type="Tables" />
+          <EntitySet Name="inscriptioncour" EntityType="Self.inscriptioncour" Schema="ecole" store:Type="Tables" />
+          <EntitySet Name="professeur" EntityType="Self.professeur" Schema="ecole" store:Type="Tables" />
+          <AssociationSet Name="cour_ibfk_1" Association="Self.cour_ibfk_1">
+            <End Role="professeur" EntitySet="professeur" />
+            <End Role="cour" EntitySet="cour" />
+          </AssociationSet>
+          <AssociationSet Name="disponibilite_ibfk_1" Association="Self.disponibilite_ibfk_1">
+            <End Role="professeur" EntitySet="professeur" />
+            <End Role="disponibilite" EntitySet="disponibilite" />
+          </AssociationSet>
+          <AssociationSet Name="inscriptioncour_ibfk_1" Association="Self.inscriptioncour_ibfk_1">
+            <End Role="cour" EntitySet="cour" />
+            <End Role="inscriptioncour" EntitySet="inscriptioncour" />
+          </AssociationSet>
+          <AssociationSet Name="inscriptioncour_ibfk_2" Association="Self.inscriptioncour_ibfk_2">
+            <End Role="etudiant" EntitySet="etudiant" />
+            <End Role="inscriptioncour" EntitySet="inscriptioncour" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ecoleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="admin">
+          <Key>
+            <PropertyRef Name="idAdmin" />
+          </Key>
+          <Property Name="idAdmin" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courriel" Type="String" MaxLength="254" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="motDePasse" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="cour">
+          <Key>
+            <PropertyRef Name="idcour" />
+          </Key>
+          <Property Name="idcour" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="idProfesseur" Type="Int32" />
+          <Property Name="dureeTotale" Type="Int32" Nullable="false" />
+          <Property Name="dureeParJour" Type="Int32" Nullable="false" />
+          <Property Name="prix" Type="Double" Nullable="false" />
+          <Property Name="jour" Type="String" MaxLength="10" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="heures" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateLimite" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nbInscriptionMin" Type="Int32" Nullable="false" />
+          <Property Name="nbInscriptionMax" Type="Int32" Nullable="false" />
+          <Property Name="dateDebut" Type="DateTime" Nullable="false" />
+          <Property Name="dateFin" Type="DateTime" Nullable="false" />
+          <Property Name="etatcour" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="professeur" Relationship="Self.cour_ibfk_1" FromRole="cour" ToRole="professeur" />
+          <NavigationProperty Name="inscriptioncours" Relationship="Self.inscriptioncour_ibfk_1" FromRole="cour" ToRole="inscriptioncour" />
+        </EntityType>
+        <EntityType Name="disponibilite">
+          <Key>
+            <PropertyRef Name="idDisponibilite" />
+          </Key>
+          <Property Name="idDisponibilite" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idProfesseur" Type="Int32" />
+          <Property Name="lundi" Type="Boolean" Nullable="false" />
+          <Property Name="mardi" Type="Boolean" Nullable="false" />
+          <Property Name="mercredi" Type="Boolean" Nullable="false" />
+          <Property Name="jeudi" Type="Boolean" Nullable="false" />
+          <Property Name="vendredi" Type="Boolean" Nullable="false" />
+          <Property Name="samedi" Type="Boolean" Nullable="false" />
+          <Property Name="dimanche" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="professeur" Relationship="Self.disponibilite_ibfk_1" FromRole="disponibilite" ToRole="professeur" />
+        </EntityType>
+        <EntityType Name="etudiant">
+          <Key>
+            <PropertyRef Name="idEtudiant" />
+          </Key>
+          <Property Name="idEtudiant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courriel" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateInscription" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="motDePasse" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="inscriptioncours" Relationship="Self.inscriptioncour_ibfk_2" FromRole="etudiant" ToRole="inscriptioncour" />
+        </EntityType>
+        <EntityType Name="inscriptioncour">
+          <Key>
+            <PropertyRef Name="idInscription" />
+          </Key>
+          <Property Name="idInscription" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcour" Type="Int32" />
+          <Property Name="idEtudiant" Type="Int32" />
+          <Property Name="dateInscription" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="paiments" Type="Double" Nullable="false" />
+          <NavigationProperty Name="cour" Relationship="Self.inscriptioncour_ibfk_1" FromRole="inscriptioncour" ToRole="cour" />
+          <NavigationProperty Name="etudiant" Relationship="Self.inscriptioncour_ibfk_2" FromRole="inscriptioncour" ToRole="etudiant" />
+        </EntityType>
+        <EntityType Name="professeur">
+          <Key>
+            <PropertyRef Name="idProfesseur" />
+          </Key>
+          <Property Name="idProfesseur" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="prenom" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adresse" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="telephone" Type="String" MaxLength="12" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="courriel" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateEmbauche" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idcourPossible" Type="Int32" />
+          <NavigationProperty Name="cours" Relationship="Self.cour_ibfk_1" FromRole="professeur" ToRole="cour" />
+          <NavigationProperty Name="disponibilites" Relationship="Self.disponibilite_ibfk_1" FromRole="professeur" ToRole="disponibilite" />
+        </EntityType>
+        <Association Name="cour_ibfk_1">
+          <End Role="professeur" Type="Self.professeur" Multiplicity="0..1" />
+          <End Role="cour" Type="Self.cour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="professeur">
+              <PropertyRef Name="idProfesseur" />
+            </Principal>
+            <Dependent Role="cour">
+              <PropertyRef Name="idProfesseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscriptioncour_ibfk_1">
+          <End Role="cour" Type="Self.cour" Multiplicity="0..1" />
+          <End Role="inscriptioncour" Type="Self.inscriptioncour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="cour">
+              <PropertyRef Name="idcour" />
+            </Principal>
+            <Dependent Role="inscriptioncour">
+              <PropertyRef Name="idcour" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="disponibilite_ibfk_1">
+          <End Role="professeur" Type="Self.professeur" Multiplicity="0..1" />
+          <End Role="disponibilite" Type="Self.disponibilite" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="professeur">
+              <PropertyRef Name="idProfesseur" />
+            </Principal>
+            <Dependent Role="disponibilite">
+              <PropertyRef Name="idProfesseur" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="inscriptioncour_ibfk_2">
+          <End Role="etudiant" Type="Self.etudiant" Multiplicity="0..1" />
+          <End Role="inscriptioncour" Type="Self.inscriptioncour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="etudiant">
+              <PropertyRef Name="idEtudiant" />
+            </Principal>
+            <Dependent Role="inscriptioncour">
+              <PropertyRef Name="idEtudiant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ecoleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="admins" EntityType="Self.admin" />
+          <EntitySet Name="cours" EntityType="Self.cour" />
+          <EntitySet Name="disponibilites" EntityType="Self.disponibilite" />
+          <EntitySet Name="etudiants" EntityType="Self.etudiant" />
+          <EntitySet Name="inscriptioncours" EntityType="Self.inscriptioncour" />
+          <EntitySet Name="professeurs" EntityType="Self.professeur" />
+          <AssociationSet Name="cour_ibfk_1" Association="Self.cour_ibfk_1">
+            <End Role="professeur" EntitySet="professeurs" />
+            <End Role="cour" EntitySet="cours" />
+          </AssociationSet>
+          <AssociationSet Name="inscriptioncour_ibfk_1" Association="Self.inscriptioncour_ibfk_1">
+            <End Role="cour" EntitySet="cours" />
+            <End Role="inscriptioncour" EntitySet="inscriptioncours" />
+          </AssociationSet>
+          <AssociationSet Name="disponibilite_ibfk_1" Association="Self.disponibilite_ibfk_1">
+            <End Role="professeur" EntitySet="professeurs" />
+            <End Role="disponibilite" EntitySet="disponibilites" />
+          </AssociationSet>
+          <AssociationSet Name="inscriptioncour_ibfk_2" Association="Self.inscriptioncour_ibfk_2">
+            <End Role="etudiant" EntitySet="etudiants" />
+            <End Role="inscriptioncour" EntitySet="inscriptioncours" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ecoleModelStoreContainer" CdmEntityContainer="ecoleEntities">
+          <EntitySetMapping Name="admins">
+            <EntityTypeMapping TypeName="ecoleModel.admin">
+              <MappingFragment StoreEntitySet="admin">
+                <ScalarProperty Name="idAdmin" ColumnName="idAdmin" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="cours">
+            <EntityTypeMapping TypeName="ecoleModel.cour">
+              <MappingFragment StoreEntitySet="cour">
+                <ScalarProperty Name="idcour" ColumnName="idcour" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="idProfesseur" ColumnName="idProfesseur" />
+                <ScalarProperty Name="dureeTotale" ColumnName="dureeTotale" />
+                <ScalarProperty Name="dureeParJour" ColumnName="dureeParJour" />
+                <ScalarProperty Name="prix" ColumnName="prix" />
+                <ScalarProperty Name="jour" ColumnName="jour" />
+                <ScalarProperty Name="heures" ColumnName="heures" />
+                <ScalarProperty Name="dateLimite" ColumnName="dateLimite" />
+                <ScalarProperty Name="nbInscriptionMin" ColumnName="nbInscriptionMin" />
+                <ScalarProperty Name="nbInscriptionMax" ColumnName="nbInscriptionMax" />
+                <ScalarProperty Name="dateDebut" ColumnName="dateDebut" />
+                <ScalarProperty Name="dateFin" ColumnName="dateFin" />
+                <ScalarProperty Name="etatcour" ColumnName="etatcour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="disponibilites">
+            <EntityTypeMapping TypeName="ecoleModel.disponibilite">
+              <MappingFragment StoreEntitySet="disponibilite">
+                <ScalarProperty Name="idDisponibilite" ColumnName="idDisponibilite" />
+                <ScalarProperty Name="idProfesseur" ColumnName="idProfesseur" />
+                <ScalarProperty Name="lundi" ColumnName="lundi" />
+                <ScalarProperty Name="mardi" ColumnName="mardi" />
+                <ScalarProperty Name="mercredi" ColumnName="mercredi" />
+                <ScalarProperty Name="jeudi" ColumnName="jeudi" />
+                <ScalarProperty Name="vendredi" ColumnName="vendredi" />
+                <ScalarProperty Name="samedi" ColumnName="samedi" />
+                <ScalarProperty Name="dimanche" ColumnName="dimanche" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="etudiants">
+            <EntityTypeMapping TypeName="ecoleModel.etudiant">
+              <MappingFragment StoreEntitySet="etudiant">
+                <ScalarProperty Name="idEtudiant" ColumnName="idEtudiant" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="dateInscription" ColumnName="dateInscription" />
+                <ScalarProperty Name="motDePasse" ColumnName="motDePasse" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="inscriptioncours">
+            <EntityTypeMapping TypeName="ecoleModel.inscriptioncour">
+              <MappingFragment StoreEntitySet="inscriptioncour">
+                <ScalarProperty Name="idInscription" ColumnName="idInscription" />
+                <ScalarProperty Name="idcour" ColumnName="idcour" />
+                <ScalarProperty Name="idEtudiant" ColumnName="idEtudiant" />
+                <ScalarProperty Name="dateInscription" ColumnName="dateInscription" />
+                <ScalarProperty Name="paiments" ColumnName="paiments" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="professeurs">
+            <EntityTypeMapping TypeName="ecoleModel.professeur">
+              <MappingFragment StoreEntitySet="professeur">
+                <ScalarProperty Name="idProfesseur" ColumnName="idProfesseur" />
+                <ScalarProperty Name="nom" ColumnName="nom" />
+                <ScalarProperty Name="prenom" ColumnName="prenom" />
+                <ScalarProperty Name="adresse" ColumnName="adresse" />
+                <ScalarProperty Name="telephone" ColumnName="telephone" />
+                <ScalarProperty Name="courriel" ColumnName="courriel" />
+                <ScalarProperty Name="dateEmbauche" ColumnName="dateEmbauche" />
+                <ScalarProperty Name="idcourPossible" ColumnName="idcourPossible" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
