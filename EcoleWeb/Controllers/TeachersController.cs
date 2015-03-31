@@ -10,6 +10,7 @@ using EcoleWeb.Models;
 
 namespace EcoleWeb.Controllers
 {
+    [Authorize (Roles = "admin")]
     public class TeachersController : Controller
     {
         private ecoleEntities db = new ecoleEntities();

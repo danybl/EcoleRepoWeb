@@ -10,6 +10,7 @@ using EcoleWeb.Models;
 
 namespace EcoleWeb.Controllers
 {
+    [Authorize]
     public class CoursesEnrollmentsController : Controller
     {
         private ecoleEntities db = new ecoleEntities();

@@ -10,11 +10,13 @@ using EcoleWeb.Models;
 
 namespace EcoleWeb.Controllers
 {
+    [Authorize]
     public class CoursesController : Controller
     {
         private ecoleEntities db = new ecoleEntities();
 
         // GET: Courses
+        [AllowAnonymous]
         public ActionResult Index()
         {
             var cours = db.cours.Include(c => c.professeur);
