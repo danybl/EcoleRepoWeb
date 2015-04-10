@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "AdminHome";
+}
+
+<h2>Tableau De Bord</h2>
+<hr />
+<div class="btn-group btn-group-justified">
+    <a href="@Url.Action("Index", "Teachers")" class="btn btn-info col-sm-3 gi-2x">
+        <i class="glyphicon glyphicon-list-alt"></i><br>
+        Professeurs
+    </a>
+    <a href="@Url.Action("Index", "Students")" class="btn btn-info col-sm-3 gi-2x">
+        <i class="glyphicon glyphicon-list-alt"></i><br>
+        Étudiants
+    </a>
+    <a href="@Url.Action("Index", "Courses")" class="btn btn-info col-sm-3 gi-2x">
+        <i class="glyphicon glyphicon-list-alt"></i><br>
+        Cours
+    </a>
+    <a href="@Url.Action("AdminFAQ", "Admin")" class="btn btn-info col-sm-3 gi-2x">
+        <i class="glyphicon glyphicon-question-sign"></i><br>
+        Aide
+    </a>
+</div>
