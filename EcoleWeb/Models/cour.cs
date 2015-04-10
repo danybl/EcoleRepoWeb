@@ -11,6 +11,7 @@ namespace EcoleWeb.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class cour
     {
@@ -19,20 +20,33 @@ namespace EcoleWeb.Models
         {
             this.inscriptioncours = new HashSet<inscriptioncour>();
         }
-    
+        [Display(Name = "Id du cours")]
         public int idcour { get; set; }
+        [Display(Name = "Nom du cours")]
         public string nom { get; set; }
+        [Display(Name = "Id du professeur")]
         public Nullable<int> idProfesseur { get; set; }
+        [Display(Name = "Durée totale")]
         public int dureeTotale { get; set; }
+        [Display(Name = "Durée par jour")]
         public int dureeParJour { get; set; }
+        [Display(Name = "Prix")]
         public double prix { get; set; }
+        [Display(Name = "Jour")]
         public string jour { get; set; }
+        [Display(Name = "Horaire")]
         public string heures { get; set; }
+        [Display(Name = "Date limite")]
         public System.DateTime dateLimite { get; set; }
+        [Display(Name = "Inscription maximale")]
         public int nbInscriptionMin { get; set; }
+        [Display(Name = "Inscription minimum")]
         public int nbInscriptionMax { get; set; }
+        [Display(Name = "Date de début")]
         public System.DateTime dateDebut { get; set; }
+        [Display(Name = "Date de fin")]
         public System.DateTime dateFin { get; set; }
+        [Display(Name = "État du cours")]
         public string etatcour { get; set; }
     
         public virtual professeur professeur { get; set; }

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<EcoleWeb.Models.cour>
+
+@{
+    ViewBag.Title = "IndexStudent";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nom)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dureeTotale)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.prix)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.dateLimite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.etatcour)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dureeTotale)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.prix)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.dateLimite)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.etatcour)
+            </td>
+            <td>
+                @Html.ActionLink("S'inscrire", "Create", "CourseEnrollements", new { id = item.idcour }) |
+                @Html.ActionLink("Détails", "Details", new { id = item.idcour })
+            </td>
+        </tr>
+    }
+
+</table>

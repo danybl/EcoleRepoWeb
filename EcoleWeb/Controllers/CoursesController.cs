@@ -22,6 +22,13 @@ namespace EcoleWeb.Controllers
             return View(cours.ToList());
         }
 
+        [AllowAnonymous]
+        public ActionResult IndexStudent()
+        {
+            var cours = db.cours.Include(c => c.professeur);
+            return View(cours.ToList());
+        }
+
         // GET: Courses/Details/5
         public ActionResult Details(int? id)
         {
