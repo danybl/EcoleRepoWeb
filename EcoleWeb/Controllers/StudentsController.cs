@@ -91,7 +91,7 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Students/Delete/5
-        public ActionResult Delete(int? id)
+        public ActionResult Delete(int id)
         {
             if (id == null)
             {
@@ -124,5 +124,25 @@ namespace EcoleWeb.Controllers
             }
             base.Dispose(disposing);
         }
+
+        // POST: Students/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Get(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            etudiant etudiant = db.etudiants.Find(id);
+            if (etudiant == null)
+            {
+                return HttpNotFound();
+            }
+            return View(etudiant);
+        }
+
     }
 }
