@@ -11,13 +11,16 @@ namespace EcoleWeb.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class admin
     {
         public int idAdmin { get; set; }
         public string nom { get; set; }
         public string prenom { get; set; }
+        [Display(Name = "Email")]
         public string courriel { get; set; }
+        [Display(Name = "Mot de passe")]
         public string motDePasse { get; set; }
     }
 }

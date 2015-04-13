@@ -8,12 +8,17 @@ namespace EcoleWeb.Controllers
 {
     public class AdminController : Controller
     {
-        public ActionResult AdminHome()
+        public ActionResult Login()
+        {
+            return View();
+        }
+        
+        public ActionResult Home()
         {
             return View();
         }
 
-        public ActionResult AdminFAQ()
+        public ActionResult FAQ()
         {
             return View();
         }
