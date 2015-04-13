@@ -48,7 +48,7 @@ namespace EcoleWeb.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "idEtudiant,nom,prenom,adresse,telephone,courriel,dateInscription,motDePasse")] etudiant etudiant)
+        public ActionResult Create(etudiant etudiant)
         {
             if (ModelState.IsValid)
             {
@@ -159,7 +159,7 @@ namespace EcoleWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
+        public ActionResult Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -196,19 +196,23 @@ namespace EcoleWeb.Controllers
             if (ModelState.IsValid)
             {
 
-                etudiant etudiant = db.etudiants.Find(model.Email);
-                if (etudiant == null)
-                {
-                   etudiant = new etudiant();
-                   etudiant.courriel = model.Email;
-                   etudiant.prenom = model.FirstName;
-                   etudiant.nom = model.LastName;
-                   etudiant.adresse = model.Address;
-                   etudiant.telephone = model.Phone;
-                   etudiant.motDePasse = model.Password;
-                   etudiant.dateInscription = DateTime.Now;
+                //etudiant etudiant = db.etudiants.Find(model.Email);
+                var etudiants = from e in db.etudiants
+                            where e.courriel.Equals(model.Email)
+                            select e; 
 
-                    Create(etudiant);
+                if (etudiants.Count<etudiant>() == 0)
+                {
+                    etudiant nouvEtudiant = new etudiant();
+                   nouvEtudiant.courriel = model.Email;
+                   nouvEtudiant.prenom = model.FirstName;
+                   nouvEtudiant.nom = model.LastName;
+                   nouvEtudiant.adresse = model.Address;
+                   nouvEtudiant.telephone = model.Phone;
+                   nouvEtudiant.motDePasse = model.Password;
+                   nouvEtudiant.dateInscription = DateTime.Now;
+
+                   Create(nouvEtudiant);
                 }
 
                // return RedirectToAction("Index", "Home");
