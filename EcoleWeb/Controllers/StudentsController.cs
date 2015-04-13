@@ -210,7 +210,7 @@ namespace EcoleWeb.Controllers
                    nouvEtudiant.adresse = model.Address;
                    nouvEtudiant.telephone = model.Phone;
                    nouvEtudiant.motDePasse = model.Password;
-                   nouvEtudiant.dateInscription = DateTime.Now;
+                  // nouvEtudiant.dateInscription = DateTime.Now;
 
                    Create(nouvEtudiant);
                 }
