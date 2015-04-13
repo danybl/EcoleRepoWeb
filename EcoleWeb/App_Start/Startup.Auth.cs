@@ -22,6 +22,7 @@ namespace EcoleWeb
             // Configurer le cookie de connexion
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
+                //TODO defin loginpath ffor admin
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
                 LoginPath = new PathString("/Students/Login"),
                 Provider = new CookieAuthenticationProvider

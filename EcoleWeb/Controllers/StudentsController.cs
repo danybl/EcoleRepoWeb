@@ -191,19 +191,33 @@ namespace EcoleWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public void Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
 
+                etudiant etudiant = db.etudiants.Find(model.Email);
+                if (etudiant == null)
+                {
+                   etudiant = new etudiant();
+                   etudiant.courriel = model.Email;
+                   etudiant.prenom = model.FirstName;
+                   etudiant.nom = model.LastName;
+                   etudiant.adresse = model.Address;
+                   etudiant.telephone = model.Phone;
+                   etudiant.motDePasse = model.Password;
+                   etudiant.dateInscription = DateTime.Now;
 
-                return RedirectToAction("Index", "Home");
+                    Create(etudiant);
+                }
+
+               // return RedirectToAction("Index", "Home");
 
 
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
-            return View(model);
+           // return View(model);
         }
 
 
