@@ -196,6 +196,19 @@ namespace EcoleWeb.Controllers
             if (ModelState.IsValid)
             {
 
+                etudiant etudiant = db.etudiants.Find(model.Email);
+                if (etudiant == null)
+                {
+                   etudiant = new etudiant();
+                   etudiant.courriel = model.Email;
+                   etudiant.prenom = model.FirstName;
+                   etudiant.nom = model.LastName;
+                   etudiant.adresse = model.Address;
+                   etudiant.motDePasse = model.Password;
+                   etudiant.dateInscription = DateTime.Now;
+
+                    Create(etudiant);
+                }
 
                 return RedirectToAction("Index", "Home");
 
