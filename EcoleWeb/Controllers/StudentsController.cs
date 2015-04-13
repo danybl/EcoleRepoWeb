@@ -191,7 +191,7 @@ namespace EcoleWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public void Register(RegisterViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -204,19 +204,20 @@ namespace EcoleWeb.Controllers
                    etudiant.prenom = model.FirstName;
                    etudiant.nom = model.LastName;
                    etudiant.adresse = model.Address;
+                   etudiant.telephone = model.Phone;
                    etudiant.motDePasse = model.Password;
                    etudiant.dateInscription = DateTime.Now;
 
                     Create(etudiant);
                 }
 
-                return RedirectToAction("Index", "Home");
+               // return RedirectToAction("Index", "Home");
 
 
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
-            return View(model);
+           // return View(model);
         }
 
 
