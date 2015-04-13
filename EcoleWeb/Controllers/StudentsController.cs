@@ -8,10 +8,11 @@ using System.Web;
 using System.Web.Mvc;
 using EcoleWeb.Models;
 using System.Threading.Tasks;
+using System.Web.Security;
 
 namespace EcoleWeb.Controllers
 {
-    [Authorize(Roles = "admin")]
+    //[Authorize(Roles = "admin")]
     public class StudentsController : Controller
     {
         private ecoleEntities db = new ecoleEntities();
@@ -164,9 +165,26 @@ namespace EcoleWeb.Controllers
             if (!ModelState.IsValid)
             {
                 return View(model);
+
             }
 
-            return RedirectToLocal(returnUrl);
+            var etudiants = from e in db.etudiants
+                            where e.courriel.Equals(model.Email) && e.motDePasse.Equals(model.Password)
+                            select e;
+            etudiant connexionEtudiant;
+            if (etudiants.Count<etudiant>() == 1)
+            {
+                connexionEtudiant = etudiants.First();
+                FormsAuthentication.SetAuthCookie(connexionEtudiant.courriel, false);
+                return RedirectToLocal(returnUrl);
+            }
+            else
+            {
+                ModelState.AddModelError("", "Login data is incorrect!");
+            }
+
+
+            return View("Login");
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
@@ -198,7 +216,7 @@ namespace EcoleWeb.Controllers
 
                 //etudiant etudiant = db.etudiants.Find(model.Email);
                 var etudiants = from e in db.etudiants
-                            where e.courriel.Equals(model.Email)
+                            where e.courriel.Equals(model.Email)  
                             select e; 
 
                 if (etudiants.Count<etudiant>() == 0)
@@ -223,6 +241,10 @@ namespace EcoleWeb.Controllers
             return View(model);
         }
 
-
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -182,6 +182,7 @@
     <Compile Include="Models\admin.cs">
       <DependentUpon>EcoleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\AppDbContext.cs" />
     <Compile Include="Models\cour.cs">
       <DependentUpon>EcoleModel.tt</DependentUpon>
     </Compile>
