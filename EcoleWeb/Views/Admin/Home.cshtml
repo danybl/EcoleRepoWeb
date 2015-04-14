@@ -17,8 +17,16 @@
         <i class="glyphicon glyphicon-list-alt"></i><br>
         Cours
     </a>
-    <a href="@Url.Action("AdminFAQ", "Admin")" class="btn btn-info col-sm-3 gi-2x">
+    <a href="@Url.Action("FAQ", "Admin")" class="btn btn-info col-sm-3 gi-2x">
         <i class="glyphicon glyphicon-question-sign"></i><br>
         Aide
     </a>
+    @if (Request.IsAuthenticated)
+    {
+        <a href="@Url.Action("LogOut", "Admin")" class="btn btn-info col-sm-3 gi-2x">
+            <i class="glyphicon glyphicon-log-out"></i><br>
+            LogOut
+        </a>
+        @*@Html.ActionLink("Log Out", "Logout", "Admin")*@
+    }
 </div>
