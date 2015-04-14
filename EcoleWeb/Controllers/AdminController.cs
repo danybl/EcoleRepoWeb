@@ -8,6 +8,7 @@ using System.Web.Security;
 
 namespace EcoleWeb.Controllers
 {
+    [Authorize(Users = "scott@lacarte.com")]
     public class AdminController : Controller
     {        
         public ActionResult Home()
