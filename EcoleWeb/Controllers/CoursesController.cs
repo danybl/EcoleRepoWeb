@@ -45,6 +45,7 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Courses/Create
+        [Authorize(Users = "scott@lacarte.com")]
         public ActionResult Create()
         {
             ViewBag.idProfesseur = new SelectList(db.professeurs, "idProfesseur", "nom");
@@ -70,6 +71,7 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Courses/Edit/5
+        [Authorize(Users = "scott@lacarte.com")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -103,6 +105,7 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Courses/Delete/5
+        [Authorize(Users = "scott@lacarte.com")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
