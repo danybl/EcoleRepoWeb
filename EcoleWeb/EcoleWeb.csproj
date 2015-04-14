@@ -186,6 +186,7 @@
     <Compile Include="Models\cour.cs">
       <DependentUpon>EcoleModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CoursesEnrollmentViewModel.cs" />
     <Compile Include="Models\disponibilite.cs">
       <DependentUpon>EcoleModel.tt</DependentUpon>
     </Compile>
@@ -318,6 +319,7 @@
     <Content Include="Views\Admin\FAQ.cshtml" />
     <Content Include="Views\Courses\IndexStudent.cshtml" />
     <Content Include="Views\Students\Register.cshtml" />
+    <Content Include="Views\CoursesEnrollments\Enroll.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
