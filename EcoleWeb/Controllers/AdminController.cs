@@ -9,14 +9,7 @@ using System.Web.Security;
 namespace EcoleWeb.Controllers
 {
     public class AdminController : Controller
-    {
-        private ecoleEntities db = new ecoleEntities();
-
-        public ActionResult Login()
-        {
-            return View();
-        }
-        
+    {        
         public ActionResult Home()
         {
             return View();
