@@ -147,56 +147,6 @@ namespace EcoleWeb.Controllers
         }
 
         //
-        // GET: /Account/Login
-        [AllowAnonymous]
-        public ActionResult Login(string returnUrl)
-        {
-            ViewBag.ReturnUrl = returnUrl;
-            return View();
-        }
-
-        //
-        // POST: /Account/Login
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Login(LoginViewModel model, string returnUrl)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-
-            }
-
-            var etudiants = from e in db.etudiants
-                            where e.courriel.Equals(model.Email) && e.motDePasse.Equals(model.Password)
-                            select e;
-            etudiant connexionEtudiant;
-            if (etudiants.Count<etudiant>() == 1)
-            {
-                connexionEtudiant = etudiants.First();
-                FormsAuthentication.SetAuthCookie(connexionEtudiant.courriel, true);
-                return RedirectToLocal(returnUrl);
-            }
-            else
-            {
-                ModelState.AddModelError("", "Le courriel ou le mot de passe est incorrect");
-            }
-
-
-            return View(model);
-        }
-
-        private ActionResult RedirectToLocal(string returnUrl)
-        {
-            if (Url.IsLocalUrl(returnUrl))
-            {
-                return Redirect(returnUrl);
-            }
-            return RedirectToAction("Index", "Home");
-        }
-
-        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult Register()
@@ -216,36 +166,29 @@ namespace EcoleWeb.Controllers
 
                 //etudiant etudiant = db.etudiants.Find(model.Email);
                 var etudiants = from e in db.etudiants
-                            where e.courriel.Equals(model.Email)  
-                            select e; 
+                                where e.courriel.Equals(model.Email)
+                                select e;
 
                 if (etudiants.Count<etudiant>() == 0)
                 {
                     etudiant nouvEtudiant = new etudiant();
-                   nouvEtudiant.courriel = model.Email;
-                   nouvEtudiant.prenom = model.FirstName;
-                   nouvEtudiant.nom = model.LastName;
-                   nouvEtudiant.adresse = model.Address;
-                   nouvEtudiant.telephone = model.Phone;
-                   nouvEtudiant.motDePasse = model.Password;
-                  // nouvEtudiant.dateInscription = DateTime.Now;
+                    nouvEtudiant.courriel = model.Email;
+                    nouvEtudiant.prenom = model.FirstName;
+                    nouvEtudiant.nom = model.LastName;
+                    nouvEtudiant.adresse = model.Address;
+                    nouvEtudiant.telephone = model.Phone;
+                    nouvEtudiant.motDePasse = model.Password;
+                    // nouvEtudiant.dateInscription = DateTime.Now;
 
-                   Create(nouvEtudiant);
+                    Create(nouvEtudiant);
                 }
 
-               return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Home");
 
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
             return View(model);
-        }
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Logout()
-        {
-            FormsAuthentication.SignOut();
-            return RedirectToAction("Index", "Home");
         }
 
         
