@@ -180,11 +180,11 @@ namespace EcoleWeb.Controllers
             }
             else
             {
-                ModelState.AddModelError("", "Login data is incorrect!");
+                ModelState.AddModelError("", "Le courriel ou le mot de passe est incorrect");
             }
 
 
-            return View("Login");
+            return View(model);
         }
 
         private ActionResult RedirectToLocal(string returnUrl)
@@ -245,6 +245,29 @@ namespace EcoleWeb.Controllers
         {
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Home");
+        }
+
+        //
+        // POST: /Account/LogOff
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult LogOff()
+        {
+            AuthenticationManager.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
+
+        private IAuthenticationManager AuthenticationManager
+        {
+            get
+            {
+                return HttpContext.GetOwinContext().Authentication;
+            }
+        }
+
+        protected  void Dispose()
+        {
+            base.Dispose();
         }
     }
 }
