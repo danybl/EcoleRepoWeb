@@ -133,5 +133,13 @@ namespace EcoleWeb.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public void InscriptionCours()
+        {
+
+
+
+
+        }
     }
 }
