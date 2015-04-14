@@ -12,7 +12,7 @@ namespace EcoleWeb.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class etudiant : IdentityUser
+    public partial class etudiant
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public etudiant()

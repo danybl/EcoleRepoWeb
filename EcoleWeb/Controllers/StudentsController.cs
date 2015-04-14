@@ -175,7 +175,7 @@ namespace EcoleWeb.Controllers
             if (etudiants.Count<etudiant>() == 1)
             {
                 connexionEtudiant = etudiants.First();
-                FormsAuthentication.SetAuthCookie(connexionEtudiant.courriel, false);
+                FormsAuthentication.SetAuthCookie(connexionEtudiant.courriel, true);
                 return RedirectToLocal(returnUrl);
             }
             else
