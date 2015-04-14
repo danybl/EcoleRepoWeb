@@ -116,7 +116,13 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Éditer", "Edit", new { id = Model.idcour }) |
-    @Html.ActionLink("Retour à la liste", "Index")
-</p>
+@if (Request.IsAuthenticated && User.Identity.Name.Equals("scott@lacarte.com")){
+    <p>
+        @Html.ActionLink("Éditer", "Edit", new { id = Model.idcour }) |
+        @Html.ActionLink("Retour à la liste", "Index")
+    </p>
+}else{
+    <p>
+        @Html.ActionLink("Retour à la liste", "IndexStudent")
+    </p>
+}
