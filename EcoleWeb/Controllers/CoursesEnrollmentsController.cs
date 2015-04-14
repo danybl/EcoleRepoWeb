@@ -10,7 +10,7 @@ using EcoleWeb.Models;
 
 namespace EcoleWeb.Controllers
 {
-    [Authorize]
+    [Authorize(Users = "scott@lacarte.com")]
     public class CoursesEnrollmentsController : Controller
     {
         private ecoleEntities db = new ecoleEntities();
@@ -38,6 +38,7 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: CoursesEnrollments/Create
+        [AllowAnonymous]
         public ActionResult Create()
         {
             ViewBag.idcour = new SelectList(db.cours, "idcour", "nom");
