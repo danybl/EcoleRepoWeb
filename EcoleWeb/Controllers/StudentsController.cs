@@ -178,12 +178,13 @@ namespace EcoleWeb.Controllers
                     nouvEtudiant.adresse = model.Address;
                     nouvEtudiant.telephone = model.Phone;
                     nouvEtudiant.motDePasse = model.Password;
-                    // nouvEtudiant.dateInscription = DateTime.Now;
+                    nouvEtudiant.dateInscription = DateTime.Now;
 
-                    Create(nouvEtudiant);
+                    db.etudiants.Add(nouvEtudiant);
+                    db.SaveChanges();
                 }
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Login", "Account");
 
             }
 
