@@ -1,4 +1,5 @@
-﻿@model IEnumerable<EcoleWeb.Models.cour>
+﻿@using EcoleWeb.Models
+@model IEnumerable<EcoleWeb.Models.cour>
 
 @{
     ViewBag.Title = "IndexStudent";
@@ -46,7 +47,7 @@
                 @Html.DisplayFor(modelItem => item.etatcour)
             </td>
             <td>
-                @Html.ActionLink("S'inscrire", "Enroll", "CoursesEnrollments") |
+                @Html.ActionLink("S'inscrire", "Enroll", "CoursesEnrollments", new { item.idcour }, new { id = "enrollLink" })|
                 @Html.ActionLink("Détails", "Details", new { id = item.idcour })
             </td>
         </tr>
