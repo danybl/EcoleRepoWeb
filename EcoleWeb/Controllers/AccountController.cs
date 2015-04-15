@@ -25,9 +25,11 @@ namespace EcoleWeb.Controllers
             return View();
         }
 
-
-        //
-        // GET: /Account/Login
+        /// <summary>
+        /// Retourne la vue précédant la connexion
+        /// </summary>
+        /// <param name="returnUrl">L'url la vue précédent le Login</param>
+        /// <returns>La vue précédent le Login</returns>
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
@@ -35,8 +37,12 @@ namespace EcoleWeb.Controllers
             return View();
         }
 
-        //
-        // POST: /Account/Login
+        /// <summary>
+        /// Permet à un utilisateur existant, admin ou étudiant, de se connecter au système
+        /// </summary>
+        /// <param name="model"></param>
+        /// <param name="returnUrl">L'url la vue précédent le Login</param>
+        /// <returns>La vue précédent le Login</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -66,6 +72,11 @@ namespace EcoleWeb.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Redirige un utilisateur à l'adresse précédent l'action
+        /// </summary>
+        /// <param name="returnUrl">L'url précédant l'action</param>
+        /// <returns>La page d'accueil</returns>
         private ActionResult RedirectToLocal(string returnUrl)
         {
             if (Url.IsLocalUrl(returnUrl))
@@ -75,6 +86,12 @@ namespace EcoleWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        /// <summary>
+        /// Vérifie si l'administrateur existe avant la connexion
+        /// </summary>
+        /// <param name="email">L'email de l'administrateur</param>
+        /// <param name="password">Le mot de passe de l'administrateur</param>
+        /// <returns>La confirmation ou l'infirmation de validité</returns>
         private bool IsValidAdmin(string email, string password)
         {
             bool IsValid = false;
@@ -93,6 +110,12 @@ namespace EcoleWeb.Controllers
             return IsValid;
         }
 
+        /// <summary>
+        /// Vérifie si l'étudiant existe avant la connexion
+        /// </summary>
+        /// <param name="email">L'email de l'administrateur</param>
+        /// <param name="password">Le mot de passe de l'administrateur</param>
+        /// <returns>La confirmation ou l'infirmation de validité</returns>
         private bool IsValidUser(string email, string password)
         {
             bool IsValid = false;
@@ -112,7 +135,10 @@ namespace EcoleWeb.Controllers
             return IsValid;
         }
 
-
+        /// <summary>
+        /// Déconnecte un utilisateur du système. Invalide son cookie de connexion. 
+        /// </summary>
+        /// <returns>La page d'accueil</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Logout()
