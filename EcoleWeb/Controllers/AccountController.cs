@@ -40,7 +40,7 @@ namespace EcoleWeb.Controllers
         /// <summary>
         /// Permet à un utilisateur existant, admin ou étudiant, de se connecter au système
         /// </summary>
-        /// <param name="model"></param>
+        /// <param name="model">Le model LoginViewModel</param>
         /// <param name="returnUrl">L'url la vue précédent le Login</param>
         /// <returns>La vue précédent le Login</returns>
         [HttpPost]
