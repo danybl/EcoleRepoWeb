@@ -192,10 +192,5 @@ namespace EcoleWeb.Controllers
         }
 
         
-
-        protected  void Dispose()
-        {
-            base.Dispose();
-        }
     }
 }

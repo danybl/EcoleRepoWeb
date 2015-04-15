@@ -116,7 +116,7 @@ namespace EcoleWeb.Controllers
             return View(inscriptioncour);
         }
 
-        // POST: CoursesEnrollments/Delete/5
+        // POST: CoursesEnrollments/Delete
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -137,27 +137,49 @@ namespace EcoleWeb.Controllers
         }
 
         //
-        // POST: /Account/Register
-        [HttpPost]
+        // GET: CoursesEnrollments/Enroll
         [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult Enroll(etudiant model, int? idCours)
+        public ActionResult Enroll(cour model)
         {
             if (ModelState.IsValid)
             {
+                int idCours = model.idcour;
 
-                return View(model);
+                var etudiants = from e in db.etudiants
+                               where e.courriel == User.Identity.Name
+                               select e;
+
+                etudiant etudiant = etudiants.First();
+
+                var inscriptions = from i in db.inscriptioncours
+                                   where i.idEtudiant == 1 && i.idcour == etudiant.idEtudiant
+                                   select i;
+
+                if (inscriptions.Count<inscriptioncour>() == 0)
+                {
+                    inscriptioncour nouvInscription = new inscriptioncour();
+                    nouvInscription.idEtudiant = etudiant.idEtudiant;
+                    nouvInscription.idcour = idCours;
+                    nouvInscription.paiments = 10.00;
+                    nouvInscription.dateInscription = DateTime.Now;
+                    db.inscriptioncours.Add(nouvInscription);
+                    db.SaveChanges();
+                    return RedirectToAction("IndexStudent", "Courses", new { message = "Inscription réussie" });
+                }
+                else
+                {
+                    return RedirectToAction("IndexStudent", "Courses", new { message = "Inscription annulée, vous êtes déjà inscrit(e) à ce cours" });
+                }
 
             }
 
             // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
-            return View(model);
+            return View("IndexStudents");
         }
 
         //
-        // POST: /Account/Register
+        // POST: /CoursesEnrollments/Confirm
         [HttpPost]
-        [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public ActionResult Confirm(etudiant model, int? idCours)
         {
@@ -178,11 +200,11 @@ namespace EcoleWeb.Controllers
                     nouvInscription.paiments = 10.00;
                     nouvInscription.dateInscription = DateTime.Now;
                     db.inscriptioncours.Add(nouvInscription);
-                    return RedirectToAction("Index", "Courses", new { message = "Inscription réussie" });
+                    return RedirectToAction("IndexStudents", "Courses", new { message = "Inscription réussie" });
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Courses", new { message = "Vous êtes déjà inscrit(e) à ce cours" });
+                    return RedirectToAction("IndexStudents", "Courses", new { message = "Inscription annulée, vous êtes déjà inscrit(e) à ce cours" });
                 }
 
             }

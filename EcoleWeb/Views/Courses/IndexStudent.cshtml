@@ -5,6 +5,7 @@
 }
 
 <h2>Index</h2>
+<h3>@ViewData["message"]</h3>
 
 <table class="table">
     <tr>
@@ -45,7 +46,7 @@
                 @Html.DisplayFor(modelItem => item.etatcour)
             </td>
             <td>
-                @Html.ActionLink("S'inscrire", "Enroll", "CoursesEnrollements", new { idCours = item.idcour }) |
+                @Html.ActionLink("S'inscrire", "Enroll", "CoursesEnrollments") |
                 @Html.ActionLink("Détails", "Details", new { id = item.idcour })
             </td>
         </tr>

@@ -23,8 +23,9 @@ namespace EcoleWeb.Controllers
         }
 
         [AllowAnonymous]
-        public ActionResult IndexStudent()
+        public ActionResult IndexStudent(string message)
         {
+            ViewData["message"] = message;
             var cours = db.cours.Include(c => c.professeur);
             return View(cours.ToList());
         }
