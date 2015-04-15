@@ -139,12 +139,14 @@ namespace EcoleWeb.Controllers
         //
         // GET: CoursesEnrollments/Enroll
         [AllowAnonymous]
-        public ActionResult Enroll(cour model)
+        public ActionResult Enroll(int? idCour)
         {
+            if (idCour == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
             if (ModelState.IsValid)
             {
-                int idCours = model.idcour;
-
                 var etudiants = from e in db.etudiants
                                where e.courriel == User.Identity.Name
                                select e;
@@ -152,14 +154,14 @@ namespace EcoleWeb.Controllers
                 etudiant etudiant = etudiants.First();
 
                 var inscriptions = from i in db.inscriptioncours
-                                   where i.idEtudiant == 1 && i.idcour == etudiant.idEtudiant
+                                   where i.idEtudiant == etudiant.idEtudiant && i.idcour == idCour
                                    select i;
 
                 if (inscriptions.Count<inscriptioncour>() == 0)
                 {
                     inscriptioncour nouvInscription = new inscriptioncour();
                     nouvInscription.idEtudiant = etudiant.idEtudiant;
-                    nouvInscription.idcour = idCours;
+                    nouvInscription.idcour = idCour;
                     nouvInscription.paiments = 10.00;
                     nouvInscription.dateInscription = DateTime.Now;
                     db.inscriptioncours.Add(nouvInscription);
@@ -168,7 +170,7 @@ namespace EcoleWeb.Controllers
                 }
                 else
                 {
-                    return RedirectToAction("IndexStudent", "Courses", new { message = "Inscription annulée, vous êtes déjà inscrit(e) à ce cours" });
+                    return RedirectToAction("IndexStudent", "Courses", new { message = "Vous êtes déjà inscrit(e) à ce cours" });
                 }
 
             }
