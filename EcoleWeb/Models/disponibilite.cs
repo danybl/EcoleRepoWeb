@@ -11,17 +11,27 @@ namespace EcoleWeb.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class disponibilite
     {
+        [Display(Name = "Id disponibilité")]
         public int idDisponibilite { get; set; }
+        [Display(Name = "Id Professeur")]
         public Nullable<int> idProfesseur { get; set; }
+        [Display(Name = "Lundi")]
         public bool lundi { get; set; }
+        [Display(Name = "Mardi")]
         public bool mardi { get; set; }
+        [Display(Name = "Mercredi")]
         public bool mercredi { get; set; }
+        [Display(Name = "Jeudi")]
         public bool jeudi { get; set; }
+        [Display(Name = "Vendredi")]
         public bool vendredi { get; set; }
+        [Display(Name = "Samedi")]
         public bool samedi { get; set; }
+        [Display(Name = "Dimanche")]
         public bool dimanche { get; set; }
     
         public virtual professeur professeur { get; set; }

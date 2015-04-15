@@ -11,13 +11,19 @@ namespace EcoleWeb.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class inscriptioncour
     {
+        [Display(Name = "Id Inscription")]
         public int idInscription { get; set; }
+        [Display(Name = "Id Cours")]
         public Nullable<int> idcour { get; set; }
+        [Display(Name = "Id Étudiant")]
         public Nullable<int> idEtudiant { get; set; }
+        [Display(Name = "Date d'inscription")]
         public System.DateTime dateInscription { get; set; }
+        [Display(Name = "Paiments")]
         public double paiments { get; set; }
     
         public virtual cour cour { get; set; }

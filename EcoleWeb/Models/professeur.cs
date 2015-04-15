@@ -11,6 +11,7 @@ namespace EcoleWeb.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     
     public partial class professeur
     {
@@ -20,14 +21,21 @@ namespace EcoleWeb.Models
             this.cours = new HashSet<cour>();
             this.disponibilites = new HashSet<disponibilite>();
         }
-    
+        [Display(Name = "Id Professeur")]
         public int idProfesseur { get; set; }
+        [Display(Name = "Nom")]
         public string nom { get; set; }
+        [Display(Name = "Prénom")]
         public string prenom { get; set; }
+        [Display(Name = "Adresse")]
         public string adresse { get; set; }
+        [Display(Name = "Téléphone")]
         public string telephone { get; set; }
+        [Display(Name = "Courriel")]
         public string courriel { get; set; }
+        [Display(Name = "Date d'embauche")]
         public System.DateTime dateEmbauche { get; set; }
+        [Display(Name = "Id Cours possibles")]
         public Nullable<int> idcourPossible { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
