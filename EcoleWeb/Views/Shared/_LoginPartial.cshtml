@@ -7,9 +7,16 @@
     @Html.AntiForgeryToken()
 
     <ul class="nav navbar-nav navbar-right">
+    @if (User.Identity.Name.Equals("admin@lacarte.com")){
+        <li>
+            @Html.ActionLink(User.Identity.Name, "Home", "Admin")
+        </li>
+    }
+    else { 
         <li>
             @Html.ActionLink(User.Identity.Name, "Index", "", routeValues: null, htmlAttributes: new { id = "Manage" })
         </li>
+    }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
     </ul>
     }
