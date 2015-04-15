@@ -11,12 +11,19 @@ using Microsoft.AspNet.Identity;
 
 namespace EcoleWeb.Controllers
 {
+    /// <summary>
+    /// Controlleur pour gérer les inscriptions
+    /// </summary>
     [Authorize(Users = "admin@lacarte.com")]
     public class CoursesEnrollmentsController : Controller
     {
         private ecoleEntities db = new ecoleEntities();
 
         // GET: CoursesEnrollments
+        /// <summary>
+        /// Retourne liste des inscriptions
+        /// </summary>
+        /// <returns>La vue contenant la liste des insctiptions</returns>
         public ActionResult Index()
         {
             var inscriptioncours = db.inscriptioncours.Include(i => i.cour).Include(i => i.etudiant);
@@ -24,6 +31,11 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: CoursesEnrollments/Details/5
+        /// <summary>
+        /// Retourne les détails d'une inscription
+        /// </summary>
+        /// <param name="id">L'id de l'inscription</param>
+        /// <returns>La vue Details</returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +51,10 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: CoursesEnrollments/Create
+        /// <summary>
+        /// Retourne la vue pour créer une inscription
+        /// </summary>
+        /// <returns>La vue Create</returns>
         [AllowAnonymous]
         public ActionResult Create()
         {
@@ -48,8 +64,11 @@ namespace EcoleWeb.Controllers
         }
 
         // POST: CoursesEnrollments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Crée une inscription
+        /// </summary>
+        /// <param name="inscriptioncour">L'entité Inscription</param>
+        /// <returns>La vue Index</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "idInscription,idcour,idEtudiant,dateInscription,paiments")] inscriptioncour inscriptioncour)
@@ -67,6 +86,11 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: CoursesEnrollments/Edit/5
+        /// <summary>
+        /// Retourne la vue pour éditer une inscription
+        /// </summary>
+        /// <param name="id">L'id de l'inscription à éditer</param>
+        /// <returns>La vue Edit</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,8 +108,11 @@ namespace EcoleWeb.Controllers
         }
 
         // POST: CoursesEnrollments/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Édite une inscription
+        /// </summary>
+        /// <param name="inscriptioncour">L'id de l'inscription à modifier</param>
+        /// <returns>La vue Index</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idInscription,idcour,idEtudiant,dateInscription,paiments")] inscriptioncour inscriptioncour)
@@ -102,6 +129,11 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: CoursesEnrollments/Delete/5
+        /// <summary>
+        /// Retourne la vue pour supprimer une inscription
+        /// </summary>
+        /// <param name="id">L'id de l'inscription à supprimer</param>
+        /// <returns>La vue Delete</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -117,6 +149,11 @@ namespace EcoleWeb.Controllers
         }
 
         // POST: CoursesEnrollments/Delete
+        /// <summary>
+        /// Supprime une inscription
+        /// </summary>
+        /// <param name="id">L'id de l'inscription à supprimer</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -138,6 +175,11 @@ namespace EcoleWeb.Controllers
 
         //
         // GET: CoursesEnrollments/Enroll
+        /// <summary>
+        /// Permet à un étudiant de s'inscrire
+        /// </summary>
+        /// <param name="idCour">L'id du cours auquel l'étudiant veut s'inscrire</param>
+        /// <returns>La vue IndexStudent</returns>
         [AllowAnonymous]
         public ActionResult Enroll(int? idCour)
         {
@@ -179,40 +221,5 @@ namespace EcoleWeb.Controllers
             return View("IndexStudents");
         }
 
-        //
-        // POST: /CoursesEnrollments/Confirm
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Confirm(etudiant model, int? idCours)
-        {
-            if (ModelState.IsValid)
-            {
-                if(idCours == null){
-                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-                }
-                var inscriptions = from e in db.inscriptioncours
-                                where e.idEtudiant == model.idEtudiant && e.idcour == idCours
-                                select e;
-
-                if (inscriptions.Count<inscriptioncour>() == 0)
-                {
-                    inscriptioncour nouvInscription = new inscriptioncour();
-                    nouvInscription.idEtudiant = model.idEtudiant;
-                    nouvInscription.idcour = idCours;
-                    nouvInscription.paiments = 10.00;
-                    nouvInscription.dateInscription = DateTime.Now;
-                    db.inscriptioncours.Add(nouvInscription);
-                    return RedirectToAction("IndexStudents", "Courses", new { message = "Inscription réussie" });
-                }
-                else
-                {
-                    return RedirectToAction("IndexStudents", "Courses", new { message = "Inscription annulée, vous êtes déjà inscrit(e) à ce cours" });
-                }
-
-            }
-
-            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
-            return View(model);
-        }
     }
 }
