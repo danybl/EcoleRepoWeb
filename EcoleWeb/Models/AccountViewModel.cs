@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations;
 namespace EcoleWeb.Models
 {
 
-    // Ce modele va etre utilise dans la Vue Login pour la connexion utilisateur (étudiant ou administrateur)
+    /// <summary>
+    ///  Ce modele va etre utilise dans la Vue Login pour la connexion utilisateur (étudiant ou administrateur)
+    /// </summary>
     public class LoginViewModel
     {
         // [Required] specifie que le champ Email doit être requis pour la connection

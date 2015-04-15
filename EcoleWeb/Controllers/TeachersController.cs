@@ -10,10 +10,13 @@ using EcoleWeb.Models;
 
 namespace EcoleWeb.Controllers
 {
-    [Authorize(Users = "admin@lacarte.com")]
+    /// <summary>
+    /// Controlleur qui permet de gerer les professeurs
+    /// </summary>
+    [Authorize(Users = "admin@lacarte.com")] // N'autorise que les usagers qui respectent les contraintes spécifiées.
     public class TeachersController : Controller
     {
-        private ecoleEntities db = new ecoleEntities();
+        private ecoleEntities db = new ecoleEntities(); // 
 
         // GET: Teachers
         public ActionResult Index()
