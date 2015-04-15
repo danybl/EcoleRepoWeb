@@ -18,12 +18,19 @@ namespace EcoleWeb.Controllers
         private ecoleEntities db = new ecoleEntities();
 
         // GET: Students
+        /// <summary>
+        /// Retourne la vue qui affiche les étudiants
+        /// </summary>
         public ActionResult Index()
         {
             return View(db.etudiants.ToList());
         }
 
         // GET: Students/Details/5
+        /// <summary>
+        /// Retourne la vue qui affiche les details d'un étudiant spécifique
+        /// </summary>
+        /// <param name="id">Le id de l'étudiant</param>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -39,6 +46,9 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Students/Create
+        /// <summary>
+        /// Retourne la vue pour créer un nouveau étudiant
+        /// </summary>
         public ActionResult Create()
         {
             return View();
@@ -47,6 +57,10 @@ namespace EcoleWeb.Controllers
         // POST: Students/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Méthode qui permet de créer un étudiant dans la base de données
+        /// </summary>
+        /// <param name="etudiant"> L'étudiant à créer </param>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(etudiant etudiant)
@@ -62,6 +76,11 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Students/Edit/5
+        /// <summary>
+        /// Retourne la vue pour editer un étudiant
+        /// </summary>
+        /// <param name="id"> Le id de l'étudiant à modifier</param>
+        /// <returns>La vue Edit</returns>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -79,6 +98,11 @@ namespace EcoleWeb.Controllers
         // POST: Students/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Methode qui permet de modifier les données d'un étudiant spécifique
+        /// </summary>
+        /// <param name="etudiant"> L'étudiant à modifier</param>
+        /// <returns>La vue Edit</returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "idEtudiant,nom,prenom,adresse,telephone,courriel,dateInscription,motDePasse")] etudiant etudiant)
@@ -93,6 +117,11 @@ namespace EcoleWeb.Controllers
         }
 
         // GET: Students/Delete/5
+        /// <summary>
+        /// Retourne la vue pour supprimer un étudiant
+        /// </summary>
+        /// <param name="id"> Le id de l'étudiant à modifier</param>
+        /// <returns>La vue Delete</returns>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -108,6 +137,11 @@ namespace EcoleWeb.Controllers
         }
 
         // POST: Students/Delete/5
+        /// <summary>
+        /// Méthode qui permet de supprimer un étudiant
+        /// </summary>
+        /// <param name="id">Le id de l'étudiant à supprimer</param>
+        /// <returns></returns>
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
@@ -127,27 +161,12 @@ namespace EcoleWeb.Controllers
             base.Dispose(disposing);
         }
 
-        // POST: Students/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Get(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            etudiant etudiant = db.etudiants.Find(id);
-            if (etudiant == null)
-            {
-                return HttpNotFound();
-            }
-            return View(etudiant);
-        }
-
         //
         // GET: /Account/Register
+        /// <summary>
+        /// Retorne la vue pour inscrire un étudiant
+        /// </summary>
+        /// <returns>La vue Register</returns>
         [AllowAnonymous]
         public ActionResult Register()
         {
@@ -156,6 +175,11 @@ namespace EcoleWeb.Controllers
 
         //
         // POST: /Account/Register
+        /// <summary>
+        /// Méthode qui permet d'inscrire un étudiant dans la base de données
+        /// </summary>
+        /// <param name="model">Le modele à utiliser pour faire l'inscription</param>
+        /// <returns>La vue Register</returns>
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
