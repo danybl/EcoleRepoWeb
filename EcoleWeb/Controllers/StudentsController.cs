@@ -164,7 +164,6 @@ namespace EcoleWeb.Controllers
             if (ModelState.IsValid)
             {
 
-                //etudiant etudiant = db.etudiants.Find(model.Email);
                 var etudiants = from e in db.etudiants
                                 where e.courriel.Equals(model.Email)
                                 select e;

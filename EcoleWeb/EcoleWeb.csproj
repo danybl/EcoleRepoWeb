@@ -320,6 +320,7 @@
     <Content Include="Views\Courses\IndexStudent.cshtml" />
     <Content Include="Views\Students\Register.cshtml" />
     <Content Include="Views\CoursesEnrollments\Enroll.cshtml" />
+    <Content Include="Views\CoursesEnrollments\EnrollmentConfirmation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

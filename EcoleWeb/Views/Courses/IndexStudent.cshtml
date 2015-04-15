@@ -45,7 +45,7 @@
                 @Html.DisplayFor(modelItem => item.etatcour)
             </td>
             <td>
-                @Html.ActionLink("S'inscrire", "Create", "CourseEnrollements", new { id = item.idcour }) |
+                @Html.ActionLink("S'inscrire", "Enroll", "CoursesEnrollements", new { idCours = item.idcour }) |
                 @Html.ActionLink("Détails", "Details", new { id = item.idcour })
             </td>
         </tr>

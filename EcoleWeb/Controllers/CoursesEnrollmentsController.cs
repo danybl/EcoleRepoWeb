@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using EcoleWeb.Models;
+using Microsoft.AspNet.Identity;
 
 namespace EcoleWeb.Controllers
 {
@@ -135,12 +136,59 @@ namespace EcoleWeb.Controllers
             base.Dispose(disposing);
         }
 
-        public void InscriptionCours()
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Enroll(etudiant model, int? idCours)
         {
+            if (ModelState.IsValid)
+            {
 
+                return View(model);
 
+            }
 
+            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+            return View(model);
+        }
 
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult Confirm(etudiant model, int? idCours)
+        {
+            if (ModelState.IsValid)
+            {
+                if(idCours == null){
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                var inscriptions = from e in db.inscriptioncours
+                                where e.idEtudiant == model.idEtudiant && e.idcour == idCours
+                                select e;
+
+                if (inscriptions.Count<inscriptioncour>() == 0)
+                {
+                    inscriptioncour nouvInscription = new inscriptioncour();
+                    nouvInscription.idEtudiant = model.idEtudiant;
+                    nouvInscription.idcour = idCours;
+                    nouvInscription.paiments = 10.00;
+                    nouvInscription.dateInscription = DateTime.Now;
+                    db.inscriptioncours.Add(nouvInscription);
+                    return RedirectToAction("Index", "Courses", new { message = "Inscription réussie" });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Courses", new { message = "Vous êtes déjà inscrit(e) à ce cours" });
+                }
+
+            }
+
+            // Si nous sommes arrivés là, un échec s’est produit. Réafficher le formulaire
+            return View(model);
         }
     }
 }
