@@ -5,11 +5,15 @@ namespace EcoleWeb.Models
 {
     public class LoginViewModel
     {
+        // [Required] specifie que le champ Email doit être requis pour la connection
+        // [Display(Name)] permet de affiche un label pour le email
+        // [EmailAddress] permet de valider une addresse courriel
         [Required]
         [Display(Name = "Courrier électronique")]
         [EmailAddress]
         public string Email { get; set; }
 
+        // [DataType(DataType.Password)] specifie l'attribut comme étant de type Password
         [Required]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
