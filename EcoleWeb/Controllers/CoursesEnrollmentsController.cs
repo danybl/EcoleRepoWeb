@@ -11,7 +11,7 @@ using Microsoft.AspNet.Identity;
 
 namespace EcoleWeb.Controllers
 {
-    [Authorize(Users = "scott@lacarte.com")]
+    [Authorize(Users = "admin@lacarte.com")]
     public class CoursesEnrollmentsController : Controller
     {
         private ecoleEntities db = new ecoleEntities();

@@ -10,7 +10,7 @@ using EcoleWeb.Models;
 
 namespace EcoleWeb.Controllers
 {
-    [Authorize(Users = "scott@lacarte.com")]
+    [Authorize(Users = "admin@lacarte.com")]
     public class TeachersController : Controller
     {
         private ecoleEntities db = new ecoleEntities();

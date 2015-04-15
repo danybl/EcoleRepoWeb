@@ -12,6 +12,9 @@ using System.Web.Security;
 
 namespace EcoleWeb.Controllers
 {
+    /// <summary>
+    /// Controlleur pour gérer les connexions aux comptes étudiants et admins
+    /// </summary>
     public class AccountController : Controller
     {
         private ecoleEntities db = new ecoleEntities();
@@ -21,6 +24,7 @@ namespace EcoleWeb.Controllers
         {
             return View();
         }
+
 
         //
         // GET: /Account/Login
