@@ -64,18 +64,33 @@ namespace EcoleWeb.Models
         public string ConfirmPassword { get; set; }
     }
 
-    public class EditViewModel
+    public class EditStudentViewModel
     {
-        [Display(Name = "Addresse")]
-        public string Address { get; set; }
+        [Display(Name = "Id Étudiant")]
+        public int idEtudiant { get; set; }
+
+        [Display(Name = "Nom")]
+        public string nom { get; set; }
+
+        [Display(Name = "Prenom")]
+        public string prenom { get; set; }
+
+        [Display(Name = "Adresse")]
+        public string adresse { get; set; }
 
         [Display(Name = "Téléphone")]
-        public string Phone { get; set; }
+        public string telephone { get; set; }
 
+        [Display(Name = "Courriel")]
+        public string courriel { get; set; }
+
+        [Display(Name = "Date d'inscription")]
+        public System.DateTime dateInscription { get; set; }
+        
         [StringLength(100, ErrorMessage = "La chaîne {0} doit comporter au moins {2} caractères.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "Mot de passe")]
-        public string Password { get; set; }
+        public string motDePasse { get; set; }
 
         [Display(Name = "Confirmer le mot de passe ")]
         [Compare("Password", ErrorMessage = "Le mot de passe et le mot de passe de confirmation ne correspondent pas.")]

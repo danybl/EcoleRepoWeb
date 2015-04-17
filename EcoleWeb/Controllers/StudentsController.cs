@@ -215,6 +215,47 @@ namespace EcoleWeb.Controllers
             return View(model);
         }
 
-        
+        //
+        // GET: /Student/EditStudent
+        /// <summary>
+        /// Retorne la vue pour éditer un étudiant
+        /// </summary>
+        /// <returns>La vue EditStudent</returns>
+        [AllowAnonymous]
+        public ActionResult EditStudent()
+        {
+            var etudiants = from e in db.etudiants
+                            where e.courriel.Equals(User.Identity.Name)
+                            select e;
+
+            etudiant leEtudiant = etudiants.First();
+                if (leEtudiant == null)
+                {
+                    return HttpNotFound();
+                }
+            return View(leEtudiant);
+        }
+
+        // POST: Students/EditStudent/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>
+        /// Methode qui permet de modifier les données d'un étudiant
+        /// </summary>
+        /// <param name="etudiant"> L'étudiant à modifier</param>
+        /// <returns>La vue Edit</returns>
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public ActionResult EditStudent([Bind(Include = "idEtudiant,nom,prenom,adresse,telephone,courriel,dateInscription,motDePasse")] etudiant etudiant)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(etudiant).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
+            }
+            return View(etudiant);
+        }
     }
 }

@@ -14,7 +14,7 @@
     }
     else { 
         <li>
-            @Html.ActionLink(User.Identity.Name, "Index", "", routeValues: null, htmlAttributes: new { id = "Manage" })
+            @Html.ActionLink(User.Identity.Name, "EditStudent", "Students")
         </li>
     }
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Se déconnecter</a></li>
